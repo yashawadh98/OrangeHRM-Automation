@@ -26,7 +26,6 @@ public class DriverFactory {
    
             if (ConfigReader.get("headless").equalsIgnoreCase("true")) {
                 options.addArguments("--headless=new");
-                options.addArguments("--disable-gpu");
                 options.addArguments("--window-size=1920,1080");
             } else {
                 options.addArguments("--start-maximized");
