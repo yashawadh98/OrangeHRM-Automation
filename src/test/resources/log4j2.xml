@@ -1,0 +1,13 @@
+<Configuration>
+  <Appenders>
+    <File name="File" fileName="logs/test.log">
+      <PatternLayout pattern="%d %p %c [%t] %m%n"/>
+    </File>
+  </Appenders>
+
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="File"/>
+    </Root>
+  </Loggers>
+</Configuration>

@@ -1,33 +1,23 @@
- package com.yash.automationFramework.base;
+package com.yash.automationFramework.base;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
+import com.yash.automationFramework.listeners.TestListener;
 import com.yash.automationFramework.utils.ConfigReader;
 
+@Listeners(TestListener.class)
 public class BaseTest {
-
-    protected WebDriver driver;
 
     @BeforeMethod
     public void setUp() {
-
-        String browser = ConfigReader.get("browser");
-
-        if (browser.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
-        }
-
-        driver.manage().window().maximize();
-        driver.get(ConfigReader.get("url"));
+        DriverFactory.initDriver(ConfigReader.get("browser"));
+        DriverFactory.getDriver().get(ConfigReader.get("url"));
     }
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        DriverFactory.quitDriver();
     }
 }
-

@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yash</groupId>
-	<artifactId>automationFramework</artifactId>
+	<artifactId>OrangeHRMFramework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.15.0</version>
+			<version>4.19.0</version>
 		</dependency>
 
 		<!-- TestNG -->
@@ -38,6 +38,25 @@
 			<version>5.1.1</version>
 		</dependency>
 
+		<!-- WebDriverManager -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+
+		<!-- Log4j2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.23.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>seleniumlearningsessions</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

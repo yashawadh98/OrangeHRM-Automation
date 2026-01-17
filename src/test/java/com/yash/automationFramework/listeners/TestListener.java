@@ -1,36 +1,39 @@
 package com.yash.automationFramework.listeners;
 
-import org.testng.*;
-import com.aventstack.extentreports.*;
-import com.yash.automationFramework.utils.*;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.yash.automationFramework.base.DriverFactory;
+import com.yash.automationFramework.utils.ExtentManager;
+import com.yash.automationFramework.utils.ScreenshotUtil;
 
 public class TestListener implements ITestListener {
 
-    ExtentReports extent = ExtentManager.getExtentReport();
+    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
-        ExtentTestManager.setTest(test);
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        ExtentTestManager.getTest().pass("Test Passed");
+        test.set(
+            ExtentManager.getInstance()
+                .createTest(result.getMethod().getMethodName())
+        );
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ExtentTestManager.getTest().fail(result.getThrowable());
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        ExtentTestManager.getTest().skip("Test Skipped");
+        String path = ScreenshotUtil.takeScreenshot(
+            DriverFactory.getDriver(),
+            result.getMethod().getMethodName()
+        );
+        test.get().fail(result.getThrowable())
+            .addScreenCaptureFromPath(path);
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        extent.flush();
+        ExtentManager.getInstance().flush();
     }
 }
+
