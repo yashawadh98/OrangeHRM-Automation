@@ -1,14 +1,14 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="OrangeHRM Suite">
 
-    <listeners>
-        <listener class-name="com.yash.automationFramework.listeners.TestListener"/>
-    </listeners>
+	<listeners>
+		<listener
+			class-name="com.yash.automationFramework.listeners.TestListener" />
+	</listeners>
 
-    <test name="All Tests">
-        <packages>
-            <package name="com.yash.automationFramework.tests"/>
-        </packages>
-    </test>
+	<test name="All Tests">
+		<packages>
+			<package name="com.yash.automationFramework.tests" />
+		</packages>
+	</test>
 
 </suite>
