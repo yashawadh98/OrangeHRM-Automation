@@ -31,6 +31,7 @@ public class LoginPage extends BasePage {
 	/* Actions */
 
 	public void login(String username, String password) {
+		waitForUrlContains("auth/login");
 		waitForVisibility(usernameInput);
 		type(usernameInput, username);
 		type(passwordInput, password);

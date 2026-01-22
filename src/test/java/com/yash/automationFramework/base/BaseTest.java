@@ -10,7 +10,7 @@ import com.yash.automationFramework.pages.LoginPage;
 
 public class BaseTest {
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void setup() {
 		DriverFactory.initDriver();
 		DriverFactory.getDriver()

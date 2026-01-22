@@ -12,31 +12,27 @@ public class AdminTest extends BaseTest {
 
 	@Test
 	public void verifyAdminPageLoads() {
-		AdminPage admin =
-			new DashboardPage(DriverFactory.getDriver()).goToAdmin();
+		AdminPage admin = new DashboardPage(DriverFactory.getDriver()).goToAdmin();
 		Assert.assertTrue(admin.isAdminPageDisplayed());
 	}
 
 	@Test
 	public void verifySearchByUsername() {
-		AdminPage admin =
-			new DashboardPage(DriverFactory.getDriver()).goToAdmin();
+		AdminPage admin = new DashboardPage(DriverFactory.getDriver()).goToAdmin();
 		admin.searchByUsername("Admin");
 		Assert.assertTrue(admin.isRecordsDisplayed());
 	}
 
 	@Test
 	public void verifyResetFunctionality() {
-		AdminPage admin =
-			new DashboardPage(DriverFactory.getDriver()).goToAdmin();
+		AdminPage admin = new DashboardPage(DriverFactory.getDriver()).goToAdmin();
 		admin.searchByUsername("Admin");
 		admin.resetSearch();
 	}
 
 	@Test
 	public void verifyAddButtonPresence() {
-		AdminPage admin =
-			new DashboardPage(DriverFactory.getDriver()).goToAdmin();
+		AdminPage admin = new DashboardPage(DriverFactory.getDriver()).goToAdmin();
 		Assert.assertTrue(admin.isAddButtonVisible());
 	}
 }
