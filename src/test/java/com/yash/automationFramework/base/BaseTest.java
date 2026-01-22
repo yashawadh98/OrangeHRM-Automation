@@ -4,19 +4,25 @@ package com.yash.automationFramework.base;
 
 
 import org.testng.annotations.*;
+import com.yash.automationFramework.listeners.TestListener;
+import com.yash.automationFramework.pages.LoginPage;
+
 
 public class BaseTest {
 
-	@BeforeSuite
-    public void globalSetUp() {
-        DriverFactory.initDriver();
-        DriverFactory.getDriver()
-            .get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-    }
+	@BeforeMethod
+	public void setup() {
+		DriverFactory.initDriver();
+		DriverFactory.getDriver()
+			.get("https://opensource-demo.orangehrmlive.com/");
 
-    @AfterSuite
-    public void globalTearDown() {
-        DriverFactory.quitDriver();
-    }
+		LoginPage login = new LoginPage(DriverFactory.getDriver());
+		login.login("Admin", "admin123");
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		DriverFactory.quitDriver();
+	}
 
 }

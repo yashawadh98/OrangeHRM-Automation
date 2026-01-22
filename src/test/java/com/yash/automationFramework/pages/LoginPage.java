@@ -1,35 +1,39 @@
 package com.yash.automationFramework.pages;
 
-import java.time.Duration;
-
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 
 import com.yash.automationFramework.base.BasePage;
 
 public class LoginPage extends BasePage {
 
+	private WebDriver driver;
+
+	/* Locators */
 	@FindBy(name = "username")
-	private WebElement username;
+	private WebElement usernameInput;
 
 	@FindBy(name = "password")
-	private WebElement password;
+	private WebElement passwordInput;
 
 	@FindBy(xpath = "//button[@type='submit']")
-	private WebElement loginBtn;
+	private WebElement loginButton;
 
+	/* Constructor */
 	public LoginPage(WebDriver driver) {
 		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
-	public void login(String user, String pass) {
-		type(username, user);
-		type(password, pass);
-		click(loginBtn);
+	/* Actions */
 
-		wait.until(ExpectedConditions.urlContains("dashboard"));
+	public void login(String username, String password) {
+		waitForVisibility(usernameInput);
+		type(usernameInput, username);
+		type(passwordInput, password);
+		click(loginButton);
 	}
-
 }
