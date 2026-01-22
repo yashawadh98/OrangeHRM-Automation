@@ -4,9 +4,7 @@ package com.yash.automationFramework.base;
 
 
 import org.testng.annotations.*;
-import com.yash.automationFramework.listeners.TestListener;
 
-@Listeners(TestListener.class)
 public class BaseTest {
 
 	@BeforeSuite
