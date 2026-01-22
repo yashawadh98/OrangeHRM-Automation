@@ -1,23 +1,31 @@
 package com.yash.automationFramework.utils;
 
 import java.io.File;
-import org.openqa.selenium.*;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtil {
 
-    public static String takeScreenshot(WebDriver driver, String name) {
-        String dir = "screenshots";
-        String path = dir + "/" + name + ".png";
+    public static String capture(WebDriver driver, String testName) {
 
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File dest = new File(path);
+        String timestamp =
+            new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        // ✅ IMPORTANT: Create directory if not exists (Jenkins-safe)
-        dest.getParentFile().mkdirs();
+        String path =
+            "test-output/screenshots/" + testName + "_" + timestamp + ".png";
+
+        File src = ((TakesScreenshot) driver)
+            .getScreenshotAs(OutputType.FILE);
 
         try {
-            org.openqa.selenium.io.FileHandler.copy(src, dest);
-        } catch (Exception e) {
+            FileUtils.copyFile(src, new File(path));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return path;

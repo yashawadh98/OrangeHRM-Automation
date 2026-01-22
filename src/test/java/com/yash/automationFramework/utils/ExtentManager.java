@@ -10,10 +10,16 @@ public class ExtentManager {
     public static ExtentReports getInstance() {
         if (extent == null) {
             ExtentSparkReporter reporter =
-                new ExtentSparkReporter("reports/ExtentReport.html");
+                new ExtentSparkReporter("test-output/ExtentReport.html");
+
+            reporter.config().setReportName("Automation Test Report");
+            reporter.config().setDocumentTitle("QA Automation Results");
 
             extent = new ExtentReports();
             extent.attachReporter(reporter);
+
+            extent.setSystemInfo("Tester", "Yash Srivastava");
+            extent.setSystemInfo("Environment", "QA");
         }
         return extent;
     }

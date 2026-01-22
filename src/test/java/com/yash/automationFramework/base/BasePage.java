@@ -1,19 +1,44 @@
 package com.yash.automationFramework.base;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
-public class BasePage {
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.ui.*;
 
-    protected WebDriver driver;
+public class BasePage {
+	
+	protected WebDriver driver;
     protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
+        if (driver == null) {
+            throw new RuntimeException("Driver is null. BaseTest setup not executed.");
+        }
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
+    
+ // ---------- Wait Utilities ----------
+
+    protected void waitForVisibility(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitForClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected void click(WebElement element) {
+        waitForClick(element);
+        element.click();
+    }
+
+    protected void type(WebElement element, String value) {
+        waitForVisibility(element);
+        element.clear();
+        element.sendKeys(value);
+    }
+
 }

@@ -1,23 +1,24 @@
 package com.yash.automationFramework.base;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
+
+
+import org.testng.annotations.*;
 import com.yash.automationFramework.listeners.TestListener;
-import com.yash.automationFramework.utils.ConfigReader;
 
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    @BeforeMethod
-    public void setUp() {
-        DriverFactory.initDriver(ConfigReader.get("browser"));
-        DriverFactory.getDriver().get(ConfigReader.get("url"));
+	@BeforeSuite
+    public void globalSetUp() {
+        DriverFactory.initDriver();
+        DriverFactory.getDriver()
+            .get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
     }
 
-    @AfterMethod
-    public void tearDown() {
+    @AfterSuite
+    public void globalTearDown() {
         DriverFactory.quitDriver();
     }
+
 }
